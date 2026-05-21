@@ -24,4 +24,9 @@ public class Column
         Name = name;
         Alias = alias;
     }
+
+    public Condition EqualsTo(object value)
+    {
+    return new Condition(this, "=", value);
+    }
 }
