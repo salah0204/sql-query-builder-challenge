@@ -6,7 +6,9 @@ public class Column
 
     public string Name { get; }
 
-    public Column(Table table, string name)
+    public string? Alias { get; }
+
+    public Column(Table table, string name, string? alias = null)
     {
         if (table == null)
         {
@@ -20,5 +22,6 @@ public class Column
 
         Table = table;
         Name = name;
+        Alias = alias;
     }
 }

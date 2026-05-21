@@ -4,7 +4,9 @@ public class Table
 {
     public string Name { get; }
 
-    public Table(string name)
+    public string? Alias { get; }
+
+    public Table(string name, string? alias = null)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -12,11 +14,11 @@ public class Table
         }
 
         Name = name;
+        Alias = alias;
     }
 
-    public Column Column(string name)
-{
-    return new Column(this, name);
-}
-
+    public Column Column(string name, string? alias = null)
+    {
+        return new Column(this, name, alias);
+    }
 }
