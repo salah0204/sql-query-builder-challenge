@@ -1,20 +1,14 @@
-﻿using SQLQueryBuilderChallenge.QueryBuilder;
+﻿using SQLQueryBuilderChallenge.Examples;
 
-var events = new Table("Events", "e");
-var attendees = new Table("Attendees", "a");
-var eventAttendees = new Table("EventAttendees", "ea");
+Console.WriteLine("Simple query:");
+ExampleQueries.SimpleQueryExample();
 
-var eventId = events.Column("Id");
-var eventName = events.Column("Name");
-var attendeeId = attendees.Column("Id");
-var attendeeName = attendees.Column("Name");
-var eventAttendeeEventId = eventAttendees.Column("EventId");
-var eventAttendeeAttendeeId = eventAttendees.Column("AttendeeId");
+Console.WriteLine();
 
-var query = new SelectQuery(events)
-    .Select(eventName, attendeeName)
-    .InnerJoin(eventAttendees, eventId, eventAttendeeEventId)
-    .InnerJoin(attendees, eventAttendeeAttendeeId, attendeeId)
-    .Where(attendeeName.EqualsTo("Salah"));
+Console.WriteLine("Join query:");
+ExampleQueries.JoinQueryExample();
 
-Console.WriteLine(query.ToSql());
+Console.WriteLine();
+
+Console.WriteLine("Left outer join query:");
+ExampleQueries.LeftOuterJoinExample();

@@ -27,9 +27,9 @@ public class SelectQuery
         return this;
     }
 
-    public SelectQuery LeftJoin(Table table, Column leftColumn, Column rightColumn)
+    public SelectQuery LeftOuterJoin(Table table, Column leftColumn, Column rightColumn)
     {
-        Joins.Add(new Join("LEFT JOIN", table, leftColumn, rightColumn));
+        Joins.Add(new Join("LEFT OUTER JOIN", table, leftColumn, rightColumn));
         return this;
     }
 
