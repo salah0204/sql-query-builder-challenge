@@ -1,16 +1,20 @@
 ﻿using SQLQueryBuilderChallenge.QueryBuilder;
 
-var attendees = new Table("Attendees", "a");
 var events = new Table("Events", "e");
+var attendees = new Table("Attendees", "a");
+var eventAttendees = new Table("EventAttendees", "ea");
 
+var eventId = events.Column("Id");
+var eventName = events.Column("Name");
+var attendeeId = attendees.Column("Id");
 var attendeeName = attendees.Column("Name");
-var important = events.Column("Important");
+var eventAttendeeEventId = eventAttendees.Column("EventId");
+var eventAttendeeAttendeeId = eventAttendees.Column("AttendeeId");
 
-var nameCondition = attendeeName.EqualsTo("Salah");
-var importantCondition = important.EqualsTo(1);
+var query = new SelectQuery(events)
+    .Select(eventName, attendeeName)
+    .InnerJoin(eventAttendees, eventId, eventAttendeeEventId)
+    .InnerJoin(attendees, eventAttendeeAttendeeId, attendeeId)
+    .Where(attendeeName.EqualsTo("Salah"));
 
-var combinedCondition = nameCondition.Or(importantCondition);
-
-Console.WriteLine($"{nameCondition.Column?.Name} {nameCondition.Operator} {nameCondition.Value}");
-Console.WriteLine($"{importantCondition.Column?.Name} {importantCondition.Operator} {importantCondition.Value}");
-Console.WriteLine($"Combined with: {combinedCondition.Connector}");
+Console.WriteLine(query.ToSql());
